@@ -1,0 +1,45 @@
+apiVersion: aikart.dev/v1
+kind: AgentManifest
+
+metadata:
+  name: studypilot-agent
+  displayName: "StudyPilot — Agentic Study Planner"
+  description: "An agentic study planner that analyzes a student's study request, selects planning tools, calculates available time, prioritizes weak topics, and generates a personalized study plan."
+
+runtime:
+  type: docker
+  image: "REPLACE_WITH_PUBLIC_DOCKER_IMAGE"
+
+resources:
+  cpu: 1
+  memoryMb: 2048
+  timeoutSeconds: 120
+
+inputs:
+  - name: subject
+    label: "Subject"
+    type: text
+    required: true
+
+  - name: days
+    label: "Days Available"
+    type: number
+    required: true
+
+  - name: hours_per_day
+    label: "Study Hours Per Day"
+    type: number
+    required: true
+
+  - name: weak_topics
+    label: "Weak Topics"
+    type: textarea
+    required: false
+
+output:
+  format: markdown
+
+security:
+  networkEgress: allowlist
+  egressAllowlist:
+    - "api.groq.com"
