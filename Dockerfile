@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy standalone agent runner
 COPY run.py .
+COPY main.py .
 
 # Run run.py as the container command
 CMD ["python", "run.py"]
